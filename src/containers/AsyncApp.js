@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
     selectSubreddit,
-    mouseEnterPost,
-    mouseExitPost,
     fetchPostsIfNeeded,
-    invalidateSubreddit
+    invalidateSubreddit,
+    mouseEnterPost,
+    mouseExitPost
 } from "../actions";
 import Picker from "../components/Picker";
 import Posts from "./Posts";
@@ -20,30 +20,33 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 
 class AsyncApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleRefreshClick = this.handleRefreshClick.bind(this);
-    }
-    componentDidMount() {
+    componentDidMount = () => {
         this.props.dispatch(fetchPostsIfNeeded(this.props.selectedSubreddit));
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate = (prevProps) => {
         if(this.props.selectedSubreddit !== prevProps.selectedSubreddit) {
             this.props.dispatch(fetchPostsIfNeeded(this.props.selectedSubreddit));
         }
     }
 
-    handleChange(nextSubreddit) {
+    handleChange = (nextSubreddit) => {
         this.props.dispatch(selectSubreddit(nextSubreddit));
     }
 
-    handleRefreshClick(e) {
+    handleRefreshClick = (e) => {
         e.preventDefault();
 
         this.props.dispatch(invalidateSubreddit(this.props.selectedSubreddit));
         this.props.dispatch(fetchPostsIfNeeded(this.props.selectedSubreddit));
+    }
+
+    handlerMouseEnterPost = (index) => {
+        console.log(index);
+    }
+
+    handleMouseLeavePost = (index) => {
+        console.log(index);
     }
 
     render() {
@@ -93,7 +96,9 @@ class AsyncApp extends React.Component {
                         <Col>
                             <ListGroup>
                                 <Posts 
-                                    posts={this.props.posts} 
+                                    posts={this.props.posts}
+                                    onMouseEnterPost={(index) => this.handlerMouseEnterPost(index)}
+                                    onMouseLeavePost={(index) => this.handleMouseLeavePost(index)}
                                 />
                             </ListGroup>
                         </Col>

@@ -7,7 +7,7 @@ import noimg from "../assets/noimg.png";
 class Post extends React.Component {
     render() {
         return (
-            <Media onMouseEnter={this.props.onMouseEnter} onMouseLeave={this.props.onMouseLeave}>
+            <Media onMouseEnter={this.props.onMouseEnterPost} onMouseLeave={this.props.onMouseLeavePost}>
                 <a href={this.props.post.url} style={{margin: "0 10px 0 0"}}>
                     <Image width={128} height={128} src={(this.props.post.thumbnail && this.props.post.thumbnail.substring(0,4) === "http") ? this.props.post.thumbnail : noimg} rounded/>
                 </a>
@@ -25,8 +25,8 @@ class Post extends React.Component {
 Post.propTypes = {
     post: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired
+    onMouseEnterPost: PropTypes.func.isRequired,
+    onMouseLeavePost: PropTypes.func.isRequired
 }
 
 export default Post;

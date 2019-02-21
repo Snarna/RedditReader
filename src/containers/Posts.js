@@ -4,14 +4,6 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Post from "../components/Post";
 
 class Posts extends React.Component {
-    handleMouseEnter = (index) => {
-        console.log("Mouse enter:" + index);
-    }
-
-    handleMouseLeave = (index) => {
-        console.log("Mouse leave:" + index);
-    }
-
     render() {
         return (
             this.props.posts.map((post, index) => {
@@ -20,8 +12,8 @@ class Posts extends React.Component {
                         <Post 
                             post={post} 
                             index={index}
-                            onMouseEnter={() => this.handleMouseEnter(index)}
-                            onMouseLeave={() => this.handleMouseLeave(index)} 
+                            onMouseEnterPost={() => this.props.onMouseEnterPost(index)}
+                            onMouseLeavePost={() => this.props.onMouseLeavePost(index)} 
                         />
                     </ListGroupItem>
                 );
@@ -31,7 +23,9 @@ class Posts extends React.Component {
 }
 
 Posts.propTypes = {
-    posts: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired,
+    onMouseEnterPost: PropTypes.func.isRequired,
+    onMouseLeavePost: PropTypes.func.isRequired
 }
 
 export default Posts;
