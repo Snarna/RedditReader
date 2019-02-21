@@ -1,20 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Form from "react-bootstrap/Form";
+
 class Picker extends React.Component {
     render() {
         return(
             <span>
-                <h1>{this.props.value}</h1>
-                <select onChange={e => this.props.onChange(e.target.value)} value={this.props.value}>
-                    {this.props.options.map((option, index) => {
-                        return(
-                            <option value={option} key={option+index}>
-                                {option}
-                            </option>
-                        );
-                    })}
-                </select>
+                <Form>
+                    <Form.Group>
+                        <Form.Control as="select" onChange={e => this.props.onChange(e.target.value)} value={this.props.value}>
+                            {this.props.options.map((option, index) => {
+                                return (
+                                    <option value={option} key={index}> {option} </option>
+                                );
+                            })}
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
             </span>
         );
     }

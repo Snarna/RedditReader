@@ -9,6 +9,13 @@ import {
 import Picker from "../components/Picker";
 import Posts from "../components/Posts";
 
+// Test boostrap
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 class AsyncApp extends React.Component {
     constructor(props) {
         super(props);
@@ -38,34 +45,42 @@ class AsyncApp extends React.Component {
 
     render() {
         return(
-            <div> 
-                <Picker 
-                    value={this.props.selectedSubreddit}
-                    onChange={this.handleChange}
-                    options={["reactjs", "frontend"]}
-                />
-                <p>
-                    {this.props.lastUpdated && (
-                        <span>
-                            Last updated at {new Date(this.props.lastUpdated).toLocaleTimeString()}.{' '}
-                        </span>
-                    )}
-                    {!this.props.isFetching && (
-                        <button onClick={this.handleRefreshClick}>Refresh</button>
-                    )}
-                </p>
-                {this.props.isFetching && this.props.posts.length === 0 && (
-                    <h2>Loading ....</h2>
-                )}
+
+            <Container>
+                <Jumbotron>
+                    <h1> Subreddit Viewer </h1>
+                    <p> 
+                        Current selected topic: {this.props.selectedSubreddit}
+                    </p>
+                </Jumbotron>
+
+                <Row>
+                    <Col sm="10">
+                        <Picker 
+                            value={this.props.selectedSubreddit}
+                            onChange={this.handleChange}
+                            options={["reactjs", "frontend", "anime"]}
+                        />
+                    </Col>
+                    <Col>
+                        <Button variant="primary" onClick={this.handleRefreshClick} disabled={this.props.isFetching} block> {this.props.isFetching ? "Fetching..." : "Refresh"} </Button>
+                    </Col>
+                </Row>
+                
                 {!this.props.isFetching && this.props.posts.length === 0 && (
-                    <h2>No posts.</h2>
+                    <Row>
+                        <Col>
+                            <h2> No Posts </h2>
+                        </Col>
+                    </Row>
                 )}
+
                 {this.props.posts.length > 0 && (
-                    <div style={{opacity: this.props.isFetching? 0.5 : 1.0}}>
+                    <ul>
                         <Posts posts={this.props.posts} />
-                    </div>
+                    </ul>
                 )}
-            </div>
+            </Container>
         );
     }
 }
