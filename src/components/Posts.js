@@ -10,11 +10,11 @@ class Posts extends React.Component {
     render() {
         return (
             this.props.posts.map((post, index) => {
-                console.log(post.thumbnail);
+                console.log(post);
                 return(
                     <Media as="li" style={{margin: "0 0 30px 0"}}>
-                        <a href={post.url}>
-                            <Image width={128} height={128} src={(post.thumbnail !== "self" && post.thumbnail !== "default") ? post.thumbnail : noimg} thumbnail/>
+                        <a href={post.url} style={{margin: "0 10px 0 0"}}>
+                            <Image width={128} height={128} src={(post.thumbnail && post.thumbnail.substring(0,4) === "http") ? post.thumbnail : noimg} thumbnail/>
                         </a>
                         <Media.Body>
                             <h5> <a href={post.url}>{post.title}</a> </h5>
