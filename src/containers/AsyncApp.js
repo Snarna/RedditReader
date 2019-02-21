@@ -15,6 +15,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class AsyncApp extends React.Component {
     constructor(props) {
@@ -66,19 +67,33 @@ class AsyncApp extends React.Component {
                         <Button variant="primary" onClick={this.handleRefreshClick} disabled={this.props.isFetching} block> {this.props.isFetching ? "Fetching..." : "Refresh"} </Button>
                     </Col>
                 </Row>
+
+                <Row>
+                    <Col>
+                        {this.props.lastUpdated && (
+                            <div style={{margin: "5px 0 5px 0"}}>
+                                 Last Updated: {new Date(this.props.lastUpdated).toLocaleTimeString()}
+                            </div>
+                        )}
+                    </Col>
+                </Row>
                 
                 {!this.props.isFetching && this.props.posts.length === 0 && (
                     <Row>
                         <Col>
-                            <h2> No Posts </h2>
+                            <h2 style={{margin: "5px 0 5px 0"}}> No Posts </h2>
                         </Col>
                     </Row>
                 )}
 
                 {this.props.posts.length > 0 && (
-                    <ul>
-                        <Posts posts={this.props.posts} />
-                    </ul>
+                    <Row>
+                        <Col>
+                            <ListGroup style={{margin: "5px 0 5px 0"}}>
+                                <Posts posts={this.props.posts} />
+                            </ListGroup>
+                        </Col>
+                    </Row>
                 )}
             </Container>
         );
