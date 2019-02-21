@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import {
     SELECT_SUBREDDIT,
     MOUSE_ENTER_POST,
-    MOUSE_EXIT_POST,
+    MOUSE_LEAVE_POST,
     INVALIDATE_SUBREDDIT,
     REQUEST_POSTS,
     RECEIVE_POSTS
@@ -24,7 +24,7 @@ const mouseHoverHandler = (state=initialMouseHoverHandlerState, action) => {
         case MOUSE_ENTER_POST:
             console.log(action.postIndex);
             return state;
-        case MOUSE_EXIT_POST:
+        case MOUSE_LEAVE_POST:
             console.log(action.postIndex);
             return state;
         default:

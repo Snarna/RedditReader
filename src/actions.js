@@ -3,7 +3,7 @@ import fetch from "cross-fetch";
 // Actions
 export const SELECT_SUBREDDIT = "SELECT_SUBREDDIT";
 export const MOUSE_ENTER_POST = "MOUSE_ENTER_POST";
-export const MOUSE_EXIT_POST = "MOUSE_EXIT_POST";
+export const MOUSE_LEAVE_POST = "MOUSE_LEAVE_POST";
 export const REQUEST_POSTS = "REQUEST_POSTS";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const INVALIDATE_SUBREDDIT = "INVALIDATE_SUBREDDIT";
@@ -14,20 +14,17 @@ export const selectSubreddit = (subreddit) => ({
     subreddit: subreddit
 });
 
-export const mouseEnterPost = (postIndex) => {
-    return (dispatch, getState) => {
-        let a = getState();
-        return {
-            type: MOUSE_ENTER_POST,
-            postIndex: postIndex
-        };
-    }
+export const mouseEnterPost = (index) => {
+    return {
+        type: MOUSE_ENTER_POST,
+        index: index
+    };
 }
 
-export const mouseExitPost = (postIndex) => {
+export const mouseLeavePost = (index) => {
     return {
-        type: MOUSE_EXIT_POST,
-        postIndex: postIndex
+        type: MOUSE_LEAVE_POST,
+        index: index
     }
 }
 

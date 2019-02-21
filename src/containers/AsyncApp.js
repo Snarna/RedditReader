@@ -6,7 +6,7 @@ import {
     fetchPostsIfNeeded,
     invalidateSubreddit,
     mouseEnterPost,
-    mouseExitPost
+    mouseLeavePost
 } from "../actions";
 import Picker from "../components/Picker";
 import Posts from "./Posts";
@@ -42,11 +42,11 @@ class AsyncApp extends React.Component {
     }
 
     handlerMouseEnterPost = (index) => {
-        console.log(index);
+        this.props.dispatch(mouseEnterPost(index));
     }
 
     handleMouseLeavePost = (index) => {
-        console.log(index);
+        this.props.dispatch(mouseLeavePost(index));
     }
 
     render() {
