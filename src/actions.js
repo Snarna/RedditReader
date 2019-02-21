@@ -1,14 +1,35 @@
 import fetch from "cross-fetch";
 
+// Actions
 export const SELECT_SUBREDDIT = "SELECT_SUBREDDIT";
+export const MOUSE_ENTER_POST = "MOUSE_ENTER_POST";
+export const MOUSE_EXIT_POST = "MOUSE_EXIT_POST";
 export const REQUEST_POSTS = "REQUEST_POSTS";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const INVALIDATE_SUBREDDIT = "INVALIDATE_SUBREDDIT";
 
+// Action creators
 export const selectSubreddit = (subreddit) => ({
     type: SELECT_SUBREDDIT,
     subreddit: subreddit
 });
+
+export const mouseEnterPost = (postIndex) => {
+    return (dispatch, getState) => {
+        let a = getState();
+        return {
+            type: MOUSE_ENTER_POST,
+            postIndex: postIndex
+        };
+    }
+}
+
+export const mouseExitPost = (postIndex) => {
+    return {
+        type: MOUSE_EXIT_POST,
+        postIndex: postIndex
+    }
+}
 
 const requestPosts = (subreddit) => ({
     type: REQUEST_POSTS,

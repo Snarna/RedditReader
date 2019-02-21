@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
     selectSubreddit,
+    mouseEnterPost,
+    mouseExitPost,
     fetchPostsIfNeeded,
     invalidateSubreddit
 } from "../actions";
 import Picker from "../components/Picker";
-import Posts from "../components/Posts";
+import Posts from "./Posts";
 
 // Test boostrap
 import Jumbotron from "react-bootstrap/Jumbotron";
@@ -55,7 +57,7 @@ class AsyncApp extends React.Component {
                     </p>
                 </Jumbotron>
 
-                <Row>
+                <Row style={{margin: "5px 0 5px 0"}}>
                     <Col sm="10">
                         <Picker 
                             value={this.props.selectedSubreddit}
@@ -68,10 +70,10 @@ class AsyncApp extends React.Component {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row style={{margin: "5px 0 5px 0"}}>
                     <Col>
                         {this.props.lastUpdated && (
-                            <div style={{margin: "5px 0 5px 0"}}>
+                            <div>
                                  Last Updated: {new Date(this.props.lastUpdated).toLocaleTimeString()}
                             </div>
                         )}
@@ -79,18 +81,20 @@ class AsyncApp extends React.Component {
                 </Row>
                 
                 {!this.props.isFetching && this.props.posts.length === 0 && (
-                    <Row>
+                    <Row style={{margin: "5px 0 5px 0"}}>
                         <Col>
-                            <h2 style={{margin: "5px 0 5px 0"}}> No Posts </h2>
+                            <h2> No Posts </h2>
                         </Col>
                     </Row>
                 )}
 
                 {this.props.posts.length > 0 && (
-                    <Row>
+                    <Row style={{margin: "5px 0 5px 0"}}>
                         <Col>
-                            <ListGroup style={{margin: "5px 0 5px 0"}}>
-                                <Posts posts={this.props.posts} />
+                            <ListGroup>
+                                <Posts 
+                                    posts={this.props.posts} 
+                                />
                             </ListGroup>
                         </Col>
                     </Row>

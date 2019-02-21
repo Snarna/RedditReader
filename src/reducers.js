@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import {
     SELECT_SUBREDDIT,
+    MOUSE_ENTER_POST,
+    MOUSE_EXIT_POST,
     INVALIDATE_SUBREDDIT,
     REQUEST_POSTS,
     RECEIVE_POSTS
@@ -15,6 +17,20 @@ const selectedSubreddit = (state=initialSubredditState, action) => {
             return state;
     }
 };
+
+const initialMouseHoverHandlerState = [];
+const mouseHoverHandler = (state=initialMouseHoverHandlerState, action) => {
+    switch(action.type) {
+        case MOUSE_ENTER_POST:
+            console.log(action.postIndex);
+            return state;
+        case MOUSE_EXIT_POST:
+            console.log(action.postIndex);
+            return state;
+        default:
+            return state;
+    }
+}
 
 const initialPostsState = {
     isFetching: false,

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Form from "react-bootstrap/Form";
 
 class Picker extends React.Component {
