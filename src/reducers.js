@@ -18,20 +18,6 @@ const selectedSubreddit = (state=initialSubredditState, action) => {
     }
 };
 
-const initialMouseHoverHandlerState = [];
-const mouseHoverHandler = (state=initialMouseHoverHandlerState, action) => {
-    switch(action.type) {
-        case MOUSE_ENTER_POST:
-            console.log(action.postIndex);
-            return state;
-        case MOUSE_LEAVE_POST:
-            console.log(action.postIndex);
-            return state;
-        default:
-            return state;
-    }
-}
-
 const initialPostsState = {
     isFetching: false,
     didInvalidate: false,
@@ -60,6 +46,22 @@ const posts = (state=initialPostsState, action) => {
     }
 };
 
+const initialMouseHoverHandlerState = {};
+const mouseHoverHandlerForPosts = (state=initialMouseHoverHandlerState, action) => {
+    switch(action.type) {
+        case MOUSE_ENTER_POST:
+            return Object.assign({}, state, {
+                containsMouse: true
+            });
+        case MOUSE_LEAVE_POST:
+            return Object.assign({}, state, {
+                containsMouse: false
+            });
+        default:
+            return state;
+    }
+}
+
 const initialPostsBySubredditState = {};
 const postsBySubreddit = (state=initialPostsBySubredditState, action) => {
     switch(action.type) {
@@ -69,6 +71,11 @@ const postsBySubreddit = (state=initialPostsBySubredditState, action) => {
             let newState = {};
             newState[action.subreddit] = posts(state[action.subreddit], action);
             return Object.assign({}, state, newState);
+        case MOUSE_ENTER_POST:
+        case MOUSE_LEAVE_POST:
+            let newStateForMouseEnterPost = Object.assign({}, state);
+            newStateForMouseEnterPost[action.subreddit].items[action.index] = mouseHoverHandlerForPosts(state[action.subreddit].items[action.index], action); 
+            return Object.assign({}, state, newStateForMouseEnterPost);
         default:
             return state;
     }

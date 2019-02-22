@@ -42,11 +42,11 @@ class AsyncApp extends React.Component {
     }
 
     handlerMouseEnterPost = (index) => {
-        this.props.dispatch(mouseEnterPost(index));
+        this.props.dispatch(mouseEnterPost(this.props.selectedSubreddit, index));
     }
 
     handleMouseLeavePost = (index) => {
-        this.props.dispatch(mouseLeavePost(index));
+        this.props.dispatch(mouseLeavePost(this.props.selectedSubreddit, index));
     }
 
     render() {
@@ -118,13 +118,11 @@ AsyncApp.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    const { selectedSubreddit, postsBySubreddit } = state
-    const { isFetching, lastUpdated, items: posts } = postsBySubreddit[
-        selectedSubreddit
-    ] || {
-        isFetching: true,
+    const { selectedSubreddit, postsBySubreddit } = state;
+    const { isFetching, lastUpdated, items: posts } = postsBySubreddit[selectedSubreddit] || {
+        isFetching: false,
         items: []
-    }
+    };
     return {
         selectedSubreddit,
         posts,

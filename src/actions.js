@@ -14,16 +14,18 @@ export const selectSubreddit = (subreddit) => ({
     subreddit: subreddit
 });
 
-export const mouseEnterPost = (index) => {
+export const mouseEnterPost = (subreddit, index) => {
     return {
         type: MOUSE_ENTER_POST,
+        subreddit: subreddit,
         index: index
     };
 }
 
-export const mouseLeavePost = (index) => {
+export const mouseLeavePost = (subreddit, index) => {
     return {
         type: MOUSE_LEAVE_POST,
+        subreddit: subreddit,
         index: index
     }
 }
@@ -59,15 +61,9 @@ export const fetchPosts = (subreddit) => {
 
 const shouldFetchPosts = (state, subreddit) => {
     const posts = state.postsBySubreddit[subreddit];
-    if(!posts) {
-        return true;
-    }
-    else if(posts.isFetching) {
-        return false;
-    }
-    else {
-        return posts.didInvalidate;
-    }
+    if(!posts) { return true; }
+    else if(posts.isFetching) { return false; }
+    else { return posts.didInvalidate;}
 }
 
 export const fetchPostsIfNeeded = (subreddit) => {
