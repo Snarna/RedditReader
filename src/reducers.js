@@ -73,9 +73,8 @@ const postsBySubreddit = (state=initialPostsBySubredditState, action) => {
             return Object.assign({}, state, newState);
         case MOUSE_ENTER_POST:
         case MOUSE_LEAVE_POST:
-            let newStateForMouseEnterPost = Object.assign({}, state);
-            newStateForMouseEnterPost[action.subreddit].items[action.index] = mouseHoverHandlerForPosts(state[action.subreddit].items[action.index], action); 
-            return Object.assign({}, state, newStateForMouseEnterPost);
+            // TODO Update hover state.
+            return state;
         default:
             return state;
     }
